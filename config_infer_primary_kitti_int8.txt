@@ -1,0 +1,40 @@
+# Copyright (c) 2020 NVIDIA Corporation.  All rights reserved.
+#
+# NVIDIA Corporation and its licensors retain all intellectual property
+# and proprietary rights in and to this software, related documentation
+# and any modifications thereto.  Any use, reproduction, disclosure or
+# distribution of this software and related documentation without an express
+# license agreement from NVIDIA Corporation is strictly prohibited.
+
+[property]
+gpu-id=0
+net-scale-factor=1.0
+offsets=103.939;116.779;123.68
+tlt-model-key=tlt
+tlt-encoded-model=./frcnn_kitti_resnet18_retrain_int8.etlt
+model-color-format=1
+labelfile-path=./labels_kitti.txt
+int8-calib-file=./cal.bin
+model-engine-file=./frcnn_kitti_resnet18_retrain_int8.etlt_b8_gpu0_int8.engine
+input-dims=3;384;1248;0
+uff-input-blob-name=input_image
+batch-size=8
+## 0=FP32, 1=INT8, 2=FP16 mode
+network-mode=1
+num-detected-classes=4
+interval=0
+gie-unique-id=1
+output-blob-names=dense_regress_td/BiasAdd;dense_class_td/Softmax;proposal
+parse-bbox-func-name=NvDsInferParseCustomFrcnnTLT
+custom-lib-path=./libnvds_infercustomparser_frcnn_tlt.so
+
+[class-attrs-all]
+pre-cluster-threshold=0.3
+roi-top-offset=0
+roi-bottom-offset=0
+detected-min-w=0
+detected-min-h=0
+detected-max-w=0
+detected-max-h=0
+
+
